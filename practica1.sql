@@ -46,8 +46,11 @@ END;
                         CLASIFICACION VARCHAR2(5),
                         CONSTRAINT PK_ID_PELICULA PRIMARY KEY(ID_PELICULA)
                         );
--- VEMOS LA TABLA
+                        
+-- VEMOS LA TABLA CON DESCRIBE PELICULA
+
                         DESCRIBE PELICULA;
+                        
   CREATE TABLE HORARIO (ID_HORARIO INTEGER,
                         ID_PELICULA INTEGER
                         HORARIO VARCHAR2(8),
