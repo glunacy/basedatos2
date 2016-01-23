@@ -48,14 +48,14 @@ END;
                         );
 -- VEMOS LA TABLA
                         DESCRIBE PELICULA;
-  CREATE TABLA HORARIO (ID_HORARIO INTEGER,
+  CREATE TABLE HORARIO (ID_HORARIO INTEGER,
                         ID_PELICULA INTEGER
                         HORARIO VARCHAR2(8),
                         CONSTRAINT PK_HORARIO PRIMARY KEY(ID_HORARIO),
                         CONSTRAINT FK1_ID_PELICULA FOREIGN KEY (ID_PELICULA) REFERENCES PELICULA (ID_PELICULA)
                         );
                         
-   CREATE TABLA SALA (ID_SALA INTEGER,
+   CREATE TABLE SALA (ID_SALA INTEGER,
                         ID_PELICULA INTEGER
                         NUM_SALA INTEGER,
                         CONSTRAINT PK_ID_SALA PRIMARY KEY(ID_SALA),
