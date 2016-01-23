@@ -40,7 +40,7 @@ END;
       
   -- SISTEMA DE PELICULAS
   
-  CREATE TABLE PELICULA (ID_PRLICULA INTEGER,
+  CREATE TABLE PELICULA (ID_PELICULA INTEGER,
                         TITULO VARCHAR2(120), 
                         SINOPSIS VARCHAR2(500),
                         CLASIFICACION VARCHAR2(5),
@@ -52,14 +52,14 @@ END;
                         DESCRIBE PELICULA;
                         
   CREATE TABLE HORARIO (ID_HORARIO INTEGER,
-                        ID_PELICULA INTEGER
+                        ID_PELICULA INTEGER,
                         HORARIO VARCHAR2(8),
                         CONSTRAINT PK_HORARIO PRIMARY KEY(ID_HORARIO),
                         CONSTRAINT FK1_ID_PELICULA FOREIGN KEY (ID_PELICULA) REFERENCES PELICULA (ID_PELICULA)
                         );
                         
    CREATE TABLE SALA (ID_SALA INTEGER,
-                        ID_PELICULA INTEGER
+                        ID_PELICULA INTEGER,
                         NUM_SALA INTEGER,
                         CONSTRAINT PK_ID_SALA PRIMARY KEY(ID_SALA),
                         CONSTRAINT FK2_ID_PELICULA FOREIGN KEY (ID_PELICULA) REFERENCES PELICULA (ID_PELICULA)
