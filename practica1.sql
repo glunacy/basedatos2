@@ -36,4 +36,28 @@ END;
     
     -- HACEMOS UN SELECT PARA VER QUE HACE
     
-      SELECT * FROM DANCE;
+     SELECT * FROM DANCE;
+      
+  -- SISTEMA DE PELICULAS
+  
+  CREATE TABLE PELICULA (ID_PRLICULA INTEGER,
+                        TITULO VARCHAR2(120), 
+                        SINOPSIS VARCHAR2(500),
+                        CLASIFICACION VARCHAR2(5),
+                        CONSTRAINT PK_ID_PELICULA PRIMARY KEY(ID_PELICULA)
+                        );
+-- VEMOS LA TABLA
+                        DESCRIBE PELICULA;
+  CREATE TABLA HORARIO (ID_HORARIO INTEGER,
+                        ID_PELICULA INTEGER
+                        HORARIO VARCHAR2(8),
+                        CONSTRAINT PK_HORARIO PRIMARY KEY(ID_HORARIO),
+                        CONSTRAINT FK1_ID_PELICULA FOREIGN KEY (ID_PELICULA) REFERENCES PELICULA (ID_PELICULA)
+                        );
+                        
+   CREATE TABLA SALA (ID_SALA INTEGER,
+                        ID_PELICULA INTEGER
+                        NUM_SALA INTEGER,
+                        CONSTRAINT PK_ID_SALA PRIMARY KEY(ID_SALA),
+                        CONSTRAINT FK2_ID_PELICULA FOREIGN KEY (ID_PELICULA) REFERENCES PELICULA (ID_PELICULA)
+                        );
