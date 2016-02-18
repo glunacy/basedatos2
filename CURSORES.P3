@@ -5,8 +5,6 @@
 
 --1._ Desarrollar un bLoque PL SQL que utilizando un cursor nos de el nombre del empledo y su sueldo base. Utilizar para ello un cursor explicito.
 
---RESULTADO CON CURSOR:
-
 DECLARE
    CURSOR CUR_EMPLEADOS IS SELECT * FROM EMPLEADO_VENTAS;
 BEGIN
@@ -15,11 +13,35 @@ BEGIN
  END LOOP;
  END;
  /
- 
--- RESULTADO CON SELECT:
 
  SELECT * FROM EMPLEADO_VENTAS;
  
-SET  SERVEROUTPUT ON;
+SET SERVEROUTPUT ON;
 
+--2.- Realizar una consulta para saber los vendedores en que sucursales han laborado. Para ello utilizar cursores. 
+--Anota el resultado de ejecucion en la ventana de salidas. Contrasta el resultado con la siguiente consulta con joins:
+
+DECLARE
+
+  CURSOR CUR_NOMYSUE IS SELECT * FROM EMPLEADO_VENTAS;
+  CURSOR CUR_SUCS IS SELECT * FROM SUCURSAL;
+  
+  BEGIN
+  
+    FOR FILA IN CUR_NOMYSUE LOOP
+     FOR FILA2 IN CUR_SUCS LOOP
+    IF FILA.ID_CLIENTE = FILA2.ID_CLIENTE THEN
+    
+      DBMS_OUTPUT.PUT_LINE('NOMBRE  '|| FILA.NOMBRE_CLIENTE || ' SUCURSAL  ' || FILA2.NOMBRE);
+         END IF;
+         END LOOP;   
+         END LOOP;
+  END;
+ /
+
+SELECT EMPLEADO_VENTAS.ID_CLIENTE, EMPLEADO_VENTAS.NOMBRE_CLIENTE, SUCURSAL.NOMBRE 
+FROM EMPLEADO_VENTAS JOIN SUCURSAL  ON EMPLEADO_VENTAS.ID_CLIENTE=SUCURSAL.ID_CLIENTE;
+
+--Anota el resultado obtenido en su tiempo de ejecucion. ¿Que observas?
+-- R= EL CURSOR ES MUCHO MEJOR MAS VELOZ Y CLARO QUE UN SELECT.
 
