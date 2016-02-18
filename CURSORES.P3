@@ -1,0 +1,25 @@
+
+--CURSORES:
+
+--Actividades
+
+--1._ Desarrollar un bLoque PL SQL que utilizando un cursor nos de el nombre del empledo y su sueldo base. Utilizar para ello un cursor explicito.
+
+--RESULTADO CON CURSOR:
+
+DECLARE
+   CURSOR CUR_EMPLEADOS IS SELECT * FROM EMPLEADO_VENTAS;
+BEGIN
+  FOR REC_EMP IN CUR_EMPLEADOS LOOP
+ DBMS_OUTPUT.PUT_LINE('NOMBRE: '|| REC_EMP.NOMBRE_CLIENTE ||' SUELDO: '|| REC_EMP.SUELDO_BASE);
+ END LOOP;
+ END;
+ /
+ 
+-- RESULTADO CON SELECT:
+
+ SELECT * FROM EMPLEADO_VENTAS;
+ 
+SET  SERVEROUTPUT ON;
+
+
