@@ -1,0 +1,68 @@
+-- Crear la siguiente tabla
+
+CREATE TABLE libros
+  (
+    libro_id           INTEGER,
+    isbn              VARCHAR2(13),
+    titulo            VARCHAR2(200),
+    resumen           VARCHAR2(2000),
+    autor             VARCHAR2(200),
+    fecha_publicacion DATE,
+    num_pag           NUMBER,
+    CONSTRAINT pk_libro_id PRIMARY KEY (libro_id)
+  );
+
+SET serveroutput ON;
+
+-- Generar una secuencia que se incremente de 1 un en 1
+
+ CREATE SEQUENCE SEC_LIBROS
+  START WITH 1
+  INCREMENT BY 1
+  NOMAXVALUE;
+  /
+ 
+ 
+ --Generar un procedimiento almacenado para guardar un nuevo libro, 
+--en el formato de fecha debes de colocarlo como dia-mes-año separado con guiones medios, 
+--para ello vas a utilizar la siguiente función de Oracle
+--y en el procedimiento debes de colocar como argumentos de entrada dia, mes y anio....
+--Donde my_fecha es una fecha previamente declarada como de tipo Date.
+
+--PROCEDIMIENTO ALMACENADO:
+
+CREATE OR REPLACE PROCEDURE GUARDARLIBROS 
+(
+  MY_ID_LIBROS OUT VARCHAR2  
+, MY_ISBN IN VARCHAR2  
+, MY_TITULO IN VARCHAR2  
+, MY_RESUMEN IN VARCHAR2  
+, MY_AUTOR IN VARCHAR2
+, MY_DIA IN NUMBER
+, MY_MES IN VARCHAR2
+, MY_ANIO IN NUMBER
+, MY_NUM_PAG IN NUMBER  
+) 
+
+AS 
+ MY_DATE DATE;
+BEGIN
+my_fecha:=to_date(''||DIA||'-'||MES||'-'||ANIO);
+SELECT SEC_LIBROS.NEXTVAL INTO MY_ID_LIBROS FROM DUAL;
+ INSERT INTO LIBROS VALUES(MY_ID_LIBROS,MY_ISBN,MY_TITULO,MY_RESUMEN,MY_AUTOR,MY_FECHA_PUBLICACION,DIA,MES,ANIO,MY_NUM_PAG);
+END GUARDARLIBROS;
+
+
+-- Probar el procedimiento ejecutando el siguiente bloque pl/sql verificar que sea correcto con un select
+
+DECLARE
+  valor_id INTEGER;
+BEGIN
+  guardarlibros(valor_id, '1234','Abrupt climate change', 'Trata de que todos vamos a morir por contaminadores','John Wallace',27,'jan',2010,455);
+END;
+/
+
+SELECT * FROM libros;  
+SET serveroutput ON;
+
+  
